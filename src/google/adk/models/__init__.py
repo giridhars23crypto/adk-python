@@ -26,6 +26,22 @@ __all__ = [
     'LLMRegistry',
 ]
 
+LLMRegistry.register(Gemini)
 
-for regex in Gemini.supported_models():
-  LLMRegistry.register(Gemini)
+try:  # pragma: no cover - optional dependency
+  from .anthropic_llm import Claude
+except ModuleNotFoundError:  # pragma: no cover
+  pass
+else:  # pragma: no cover
+  __all__.append('Claude')
+  LLMRegistry.register(Claude)
+
+try:  # pragma: no cover - optional dependency
+  from .lite_llm import LiteLlm
+except ModuleNotFoundError:  # pragma: no cover
+  pass
+else:  # pragma: no cover
+  __all__.append('LiteLlm')
+  LLMRegistry.register(LiteLlm)
+
+__all__.sort()

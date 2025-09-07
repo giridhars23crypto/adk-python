@@ -15,7 +15,7 @@
 from google.adk import models
 from google.adk.models.anthropic_llm import Claude
 from google.adk.models.google_llm import Gemini
-from google.adk.models.registry import LLMRegistry
+from google.adk.models.lite_llm import LiteLlm
 import pytest
 
 
@@ -51,12 +51,8 @@ def test_match_gemini_family(model_name):
     ],
 )
 def test_match_claude_family(model_name):
-  LLMRegistry.register(Claude)
-
   assert models.LLMRegistry.resolve(model_name) is Claude
 
 
-def test_non_exist_model():
-  with pytest.raises(ValueError) as e_info:
-    models.LLMRegistry.resolve('non-exist-model')
-  assert 'Model non-exist-model not found.' in str(e_info.value)
+def test_fallback_to_litellm():
+  assert models.LLMRegistry.resolve('gpt-4o') is LiteLlm
