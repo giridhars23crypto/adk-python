@@ -921,13 +921,13 @@ class LiteLlm(BaseLlm):
   @classmethod
   @override
   def supported_models(cls) -> list[str]:
-    """Provides the list of supported models.
+    """Provides a catch-all for LiteLlm supported models.
 
-    LiteLlm supports all models supported by litellm. We do not keep track of
-    these models here. So we return an empty list.
+    LiteLlm can proxy to any model supported by LiteLLM. To allow fallback to
+    this backend, we expose a regex that matches any model name.
 
     Returns:
-      A list of supported models.
+      A list containing a single regex that matches any model name.
     """
 
-    return []
+    return [r".*"]
