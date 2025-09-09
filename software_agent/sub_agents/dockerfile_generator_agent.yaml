@@ -1,0 +1,19 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/google/adk-python/refs/heads/main/src/google/adk/agents/config_schemas/AgentConfig.json
+agent_class: LlmAgent
+name: DockerfileGeneratorAgent
+model: gemini-2.0-flash
+description: Generates a Dockerfile for the produced Python code.
+instruction: |
+  You receive the path to the Python file in {generated_file_path}.
+  Create a Dockerfile that:
+    - Uses "python:3.11-slim" as the base image.
+    - Copies {generated_file_path} into "/app".
+    - Sets the working directory to "/app".
+    - Exposes port 8000.
+    - Defines the entrypoint "python {generated_file_path}".
+  Use the write_files tool to save the Dockerfile at "Dockerfile".
+  After running the tool, respond with the JSON:
+    {"dockerfile_path": "Dockerfile", "port": "8000"}
+tools:
+  - name: software_agent.tools.write_files
+output_key: dockerfile_info

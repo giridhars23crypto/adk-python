@@ -1,0 +1,14 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/google/adk-python/refs/heads/main/src/google/adk/agents/config_schemas/AgentConfig.json
+agent_class: LlmAgent
+name: FileWriterAgent
+model: gemini-2.0-flash
+description: Creates a Python file from provided code.
+instruction: |
+  You receive Python code in {generated_code}.
+  Use the write_files tool to save it to "generated_code.py".
+  Call the tool with:
+    files: {"generated_code.py": "{generated_code}"}
+  After running the tool, respond only with the text "generated_code.py".
+tools:
+  - name: software_agent.tools.write_files
+output_key: generated_file_path

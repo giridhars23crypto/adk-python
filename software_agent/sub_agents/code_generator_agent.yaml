@@ -1,0 +1,10 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/google/adk-python/refs/heads/main/src/google/adk/agents/config_schemas/AgentConfig.json
+agent_class: LlmAgent
+name: CodeGeneratorAgent
+model: gemini-2.0-flash
+description: Generates plain Python code based on user request.
+instruction: |
+  You are a Python code generator.
+  Based only on the user's request, write Python code that fulfills it.
+  Output only the complete Python code block enclosed in triple backticks (```python ... ```).
+output_key: generated_code
