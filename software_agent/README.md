@@ -19,6 +19,8 @@ order:
 5. `docker_runner_agent.yaml` – runs the image via the `run_command` tool using
    the exposed port.
 
+All LLM agents in this pipeline use the `gemini-2.5-flash` model.
+
 ## Tools
 
 Tools for this sample live in `software_agent/tools` and are referenced with the
